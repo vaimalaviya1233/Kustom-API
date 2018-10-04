@@ -1,31 +1,31 @@
 buildscript {
     repositories {
+        google()
         jcenter()
-        maven { 
-            url "https://maven.google.com" 
-        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.0'
     }
 }
 
+plugins {
+    id "com.github.ben-manes.versions" version "0.20.0"
+}
+
 ext {
-    buildToolsVersion = "26.0.2"
-    compileSdkVersion = 26
+    buildToolsVersion = "28.0.3"
+    compileSdkVersion = 28
     targetSdkVersion = 26
-    supportLibVersion = "27.0.2"
-    glideVersion = "4.5.0"
-    gsonVersion = "2.8.2"
+    supportLibVersion = "28.0.0"
+    glideVersion = "4.8.0"
+    gsonVersion = "2.8.5"
 }
 
 allprojects {
     repositories {
         mavenLocal()
+        google()
         jcenter()
-        maven { 
-            url "https://maven.google.com" 
-        }
     }
 }
 

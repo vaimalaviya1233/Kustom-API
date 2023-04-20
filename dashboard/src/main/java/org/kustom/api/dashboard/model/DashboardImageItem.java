@@ -51,7 +51,7 @@ public class DashboardImageItem extends DashboardItem<DashboardImageItem> {
                 .load(mImageData.getThumbUrl())
                 .into(new BitmapImageViewTarget(holder.mPreview) {
                     @Override
-                    public void onResourceReady(Bitmap r, @Nullable Transition<? super Bitmap> t) {
+                    public void onResourceReady(@NonNull Bitmap r, @Nullable Transition<? super Bitmap> t) {
                         super.onResourceReady(r, t);
                         holder.onBitmapSet(r, false);
                     }

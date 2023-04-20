@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings({"ConstantConditions", "unused"})
+@SuppressWarnings({"unused"})
 public class KustomConfig {
     private static final Map<String, KustomEnv> sEnvs;
 
@@ -35,8 +35,8 @@ public class KustomConfig {
         envs.put("kwch", new KustomEnv(
                 "kwch",
                 "watches",
-                "org.kustom.watch",
-                "TBD"
+                "org.kustom.watchface",
+                "org.kustom.lib.editor.WatchAdvancedEditorActivity"
         ));
         envs.put("komp", new KustomEnv(
                 "komp",

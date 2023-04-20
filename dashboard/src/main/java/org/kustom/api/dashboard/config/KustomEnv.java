@@ -57,7 +57,7 @@ public class KustomEnv {
             } catch (IOException e) {
                 Log.e(TAG, "Unable to list folder: " + getFolder());
             }
-            mFiles = result.toArray(new String[result.size()]);
+            mFiles = result.toArray(new String[0]);
         }
         return mFiles;
     }

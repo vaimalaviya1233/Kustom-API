@@ -3,7 +3,7 @@
 
     <style name="KustomDashboardTheme.Dark" parent="KustomDashboardTheme.Dark.Base" />
 
-    <style name="KustomDashboardTheme.Dark.Base" parent="">
+    <style name="KustomDashboardTheme.Dark.Base" parent="@style/Theme.AppCompat">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionModeOverlay">true</item>
@@ -27,7 +27,7 @@
 
     <style name="KustomDashboardTheme.Light" parent="KustomDashboardTheme.Light.Base" />
 
-    <style name="KustomDashboardTheme.Light.Base" parent="">
+    <style name="KustomDashboardTheme.Light.Base" parent="@style/Theme.AppCompat.Light">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionModeOverlay">true</item>
@@ -49,7 +49,7 @@
         <item name="android:textColor">?android:attr/textColorPrimaryInverseDisableOnly</item>
     </style>
 
-    <style name="KustomDashboardTheme.Translucent" parent="">
+    <style name="KustomDashboardTheme.Translucent" parent="Theme.AppCompat">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionModeOverlay">true</item>

@@ -19,16 +19,8 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:layout_alignParentTop="true"
-            android:background="@color/kustom_translucent_background" />
-
         <FrameLayout
             android:id="@+id/progress"
-            android:layout_below="@id/toolbar"
             android:layout_above="@id/info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

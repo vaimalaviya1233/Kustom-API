@@ -1,16 +1,11 @@
 package org.kustom.api.dashboard;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +13,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -33,7 +33,7 @@ import org.kustom.api.dashboard.views.DashboardPage;
 
 import java.util.ArrayList;
 
-public class DashboardActivity extends Activity {
+public class DashboardActivity extends AppCompatActivity {
     private final static String TAG = DashboardActivity.class.getSimpleName();
 
     @Override
@@ -42,11 +42,6 @@ public class DashboardActivity extends Activity {
         setTheme(ThemeHelper.getThemeResource(this));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kustom_dashboard_activity);
-
-        // Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(DashboardSettings.get(this).dashboardTitle());
-        setActionBar(toolbar);
 
         // Reload
         new TabLoaderTask(DashboardSettings.get(this).getLastPageIndex()).execute();
@@ -120,7 +115,7 @@ public class DashboardActivity extends Activity {
                     envs.add(new DashboardImagesTab("WALLS", url));
                 }
             }
-            return envs.toArray(new DashboardTab[envs.size()]);
+            return envs.toArray(new DashboardTab[0]);
         }
 
         @Override

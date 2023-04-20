@@ -8,13 +8,6 @@
     android:orientation="vertical"
     tools:context="org.kustom.api.dashboard.DashboardActivity">
 
-    <Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="?android:attr/colorPrimary"
-        android:elevation="4dp" />
-
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"

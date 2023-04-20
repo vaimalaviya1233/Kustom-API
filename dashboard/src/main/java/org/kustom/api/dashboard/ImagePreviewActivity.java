@@ -1,26 +1,32 @@
 package org.kustom.api.dashboard;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -33,12 +39,7 @@ import org.kustom.api.dashboard.utils.WallpaperUtils;
 
 import java.io.File;
 
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
-public class ImagePreviewActivity extends Activity {
+public class ImagePreviewActivity extends AppCompatActivity {
     private final static String TAG = ImagePreviewActivity.class.getSimpleName();
 
     private final static int PERMISSION_STORAGE_REQUEST_CODE = 123;
@@ -57,12 +58,11 @@ public class ImagePreviewActivity extends Activity {
         setContentView(R.layout.kustom_image_preview_activity);
 
         // Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setActionBar(toolbar);
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-            getActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         // Load
@@ -123,6 +123,7 @@ public class ImagePreviewActivity extends Activity {
     @SuppressWarnings("UnnecessaryReturnStatement")
     @Override
     public void onRequestPermissionsResult(int code, @NonNull String perm[], @NonNull int[] result) {
+        super.onRequestPermissionsResult(code, perm, result);
         switch (code) {
             case PERMISSION_STORAGE_REQUEST_CODE: {
                 if (result.length > 0 && result[0] == PERMISSION_GRANTED) {

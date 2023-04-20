@@ -1,13 +1,17 @@
 package org.kustom.api.dashboard.utils;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -57,9 +61,15 @@ public class WallpaperBitmapLoader {
         @Override
         protected Bitmap doInBackground(Void... params) {
             try {
+                // Check for permission
+                if (ActivityCompat.checkSelfPermission(
+                        mContext,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED) return null;
+                // Load wallpaper
                 WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
                 Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-                if (wallpaperDrawable != null && wallpaperDrawable instanceof BitmapDrawable)
+                if (wallpaperDrawable instanceof BitmapDrawable)
                     return ((BitmapDrawable) wallpaperDrawable).getBitmap();
             } catch (Exception e) {
                 e.printStackTrace();

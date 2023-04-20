@@ -1,5 +1,6 @@
 package org.kustom.api.dashboard.utils;
 
+import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,9 +21,9 @@ import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class WallpaperUtils {
 
-    public static void setWallpaper(@NonNull Context context, @NonNull Bitmap bitmap)
+    public static void setWallpaper(@NonNull Activity activity, @NonNull Bitmap bitmap)
             throws IOException {
-        WallpaperManager.getInstance(context).setBitmap(bitmap);
+        WallpaperManager.getInstance(activity).setBitmap(bitmap);
     }
 
     public static File downloadWallpaper(@NonNull Context ctx, @NonNull Bitmap bmp, @NonNull String name)

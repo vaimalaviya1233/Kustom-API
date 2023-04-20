@@ -3,12 +3,13 @@ package org.kustom.api.dashboard.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import org.kustom.api.dashboard.R;
 
 @SuppressWarnings("unused")
-public class AspectRatioImageView extends ImageView {
+public class AspectRatioImageView extends AppCompatImageView {
     public static final int MEASUREMENT_WIDTH = 0;
     public static final int MEASUREMENT_HEIGHT = 1;
 

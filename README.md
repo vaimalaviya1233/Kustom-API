@@ -1,8 +1,10 @@
 # Kustom API #
-Kustom API is the core library to create Play Store Skin packages for Kustom the most advanced Android Wallpaper Engine!
+Kustom API is the core library to create Play Store Skin packages for Kustom the most advanced 
+Android customization engine!
 
 # Basic Usage
-The best way is to start from the sample application available at: https://bitbucket.org/frankmonza/kustomskinsample
+The best way is to start from the sample application available at: 
+https://gitlab.com/kustom-industries/kustom-apk-skin-sample
 
 # Manual Setup
 If you want to integrate it manually into your project just add this to your `build.gradle` file:
@@ -12,7 +14,9 @@ dependencies {
 }
 ```
 
-Then edit your Android Manifest and add the provider specifying what kind of data your are going to offer
+Then edit your Android Manifest and add the provider specifying what kind of data your are going to 
+offer, comment the action you are not using, so if you are not going to offer widgets you can
+remove the `org.kustom.provider.WIDGETS` action from the intent filter, full example:
 ```xml
 <provider
      android:name="org.kustom.api.Provider"
@@ -21,25 +25,32 @@ Then edit your Android Manifest and add the provider specifying what kind of dat
      >
      <intent-filter>
          <action android:name="org.kustom.provider.WALLPAPERS" />
+         <action android:name="org.kustom.provider.WIDGETS" />
+         <action android:name="org.kustom.provider.LOCKSCREENS" />
+         <action android:name="org.kustom.provider.WATCHFACES" />
      </intent-filter>
 </provider>
 ```
 
 # Preset Info
-If you need to add Preset Informations in your dashboard you can load easily using the Info Loader class, first add the preset library:
+If you need to add Preset Informations in your dashboard you can load easily using the Info Loader 
+class, first add the preset library:
 ```gradle
 dependencies {
     implementation 'org.bitbucket.frankmonza:kustompreset:+'
 }
 ```
 
-Then, for example, if you need to get the info for a widget called "awezome.kwgt" stored in your asset folder it will be enought to do:
+Then, for example, if you need to get the info for a widget called "awezome.kwgt" stored in your 
+asset folder it will be enought to do:
 ```java
-PresetInfoLoader.create(new AssetPresetFile("widgets/awezome.kwgt"))
+PresetInfoLoader
+    .create(new AssetPresetFile("widgets/awezome.kwgt"))
     .load(context, new PresetInfoLoader.Callback() {
         @Override
         public void onInfoLoaded(PresetInfo info) {
-            // Do something when data is loaded, for example set it to a recycle view holder, check PresetInfo class for more fields
+            // Do something when data is loaded, for example set it to a recycle view holder, check 
+            // PresetInfo class for more fields
             holder.setTitle(info.getTitle());
             holder.setAuthor(info.getAuthor());
         } 
@@ -47,7 +58,8 @@ PresetInfoLoader.create(new AssetPresetFile("widgets/awezome.kwgt"))
 ```
 
 # Image preview with Glide library
-If you are using Glide library you can easily load Kustom previews by first including preset library along with Glide basic libs:
+If you are using Glide library you can easily load Kustom previews by first including preset 
+library along with Glide basic libs:
 ```gradle
 dependencies {
     implementation 'org.bitbucket.frankmonza:kustompreset:+'

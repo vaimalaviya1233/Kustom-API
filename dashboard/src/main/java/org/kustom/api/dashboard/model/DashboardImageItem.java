@@ -2,8 +2,8 @@ package org.kustom.api.dashboard.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.bumptech.glide.Glide;

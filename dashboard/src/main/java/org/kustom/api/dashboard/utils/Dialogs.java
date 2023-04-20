@@ -3,7 +3,7 @@ package org.kustom.api.dashboard.utils;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 import org.kustom.api.dashboard.R;

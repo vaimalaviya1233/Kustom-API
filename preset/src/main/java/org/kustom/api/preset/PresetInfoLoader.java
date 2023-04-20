@@ -3,7 +3,7 @@ package org.kustom.api.preset;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.InputStream;
 import java.util.HashMap;

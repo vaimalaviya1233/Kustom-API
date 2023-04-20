@@ -2,9 +2,10 @@ package org.kustom.api.dashboard.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.annotation.CallSuper;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.CallSuper;
+import androidx.palette.graphics.Palette;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

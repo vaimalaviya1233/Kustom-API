@@ -10,8 +10,8 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import java.io.File;
@@ -84,7 +84,6 @@ public class Provider extends ContentProvider {
     /**
      * Perform upgrade routines
      */
-    @SuppressWarnings("ConstantConditions")
     @SuppressLint("CommitPrefEdits")
     public boolean onCreate() {
         Log.i(TAG, "Provider started");
@@ -106,7 +105,6 @@ public class Provider extends ContentProvider {
         return true;
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public ParcelFileDescriptor openFile(@NonNull Uri uri, @NonNull String mode)
             throws FileNotFoundException {
@@ -165,8 +163,7 @@ public class Provider extends ContentProvider {
         }
 
         // Parse uri
-        LinkedList<String> segments = new LinkedList<>();
-        segments.addAll(uri.getPathSegments());
+        LinkedList<String> segments = new LinkedList<>(uri.getPathSegments());
         final String action = segments.remove(0);
         final String archivePath = getArchivePath(segments);
         final String folderPath = getFilePath(segments);
@@ -282,15 +279,15 @@ public class Provider extends ContentProvider {
     }
 
     private String getArchivePath(List<String> segments) {
-        String path = "";
+        StringBuilder path = new StringBuilder();
         for (int i = 0; i < segments.size(); i++) {
             String segment = segments.get(i);
             if (segment.length() > 0) {
                 if (segment.matches(ARCHIVE_REGEXP)) {
-                    if (i < segments.size() - 1) path += segment;
-                    return trimPath(path);
+                    if (i < segments.size() - 1) path.append(segment);
+                    return trimPath(path.toString());
                 } else {
-                    path += segment + "/";
+                    path.append(segment).append("/");
                 }
             }
         }
@@ -298,19 +295,19 @@ public class Provider extends ContentProvider {
     }
 
     private String getFilePath(List<String> segments) {
-        String path = "";
+        StringBuilder path = new StringBuilder();
         for (int i = 0; i < segments.size(); i++) {
             String segment = segments.get(i);
             if (segment.length() > 0) {
-                path += "/" + segment;
+                path.append("/").append(segment);
                 // Start over if we find an archive
                 if (segment.matches(ARCHIVE_REGEXP)) {
-                    if (i < segments.size() - 1) path = "";
+                    if (i < segments.size() - 1) path = new StringBuilder();
                     else return trimPath(segment);
                 }
             }
         }
-        return trimPath(path);
+        return trimPath(path.toString());
     }
 
     private String trimPath(String path) {
@@ -318,7 +315,6 @@ public class Provider extends ContentProvider {
     }
 
     @NonNull
-    @SuppressWarnings("ConstantConditions")
     private AssetManager getAssets() {
         return getContext().getAssets();
     }

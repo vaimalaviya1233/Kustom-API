@@ -1,15 +1,10 @@
 package org.kustom.api.dashboard.utils;
 
-import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
 
 import org.kustom.api.dashboard.DashboardSettings;
 
@@ -21,7 +16,7 @@ import java.io.OutputStream;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.os.Environment.DIRECTORY_PICTURES;
-import static android.support.v4.content.ContextCompat.checkSelfPermission;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class WallpaperUtils {
 

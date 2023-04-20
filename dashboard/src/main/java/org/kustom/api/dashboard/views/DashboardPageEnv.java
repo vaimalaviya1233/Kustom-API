@@ -4,7 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.kustom.api.dashboard.config.KustomConfig;
 import org.kustom.api.dashboard.config.KustomEnv;

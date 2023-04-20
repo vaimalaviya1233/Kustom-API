@@ -2,8 +2,8 @@ package org.kustom.api.dashboard.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.support.annotation.IdRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;

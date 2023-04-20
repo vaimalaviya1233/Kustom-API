@@ -1,82 +1,15 @@
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-def isReleaseBuild() {
-    return VERSION_NAME.contains("SNAPSHOT") == false
-}
-
-def getReleaseRepositoryUrl() {
-    return (project.hasProperty('releaseRepositoryUrl')
-            ? project.releaseRepositoryUrl
-            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-}
-
-def getSnapshotRepositoryUrl() {
-    return (project.hasProperty('snapshotRepositoryUrl')
-            ? project.snapshowRepositoryUrl
-            : "https://oss.sonatype.org/content/repositories/snapshots/")
-}
-
-def getRepositoryUsername() {
-    return project.hasProperty('nexusUsername') ? project.nexusUsername : ""
-}
-
-def getRepositoryPassword() {
-    return project.hasProperty('nexusPassword') ? project.nexusPassword : ""
-}
-
-afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                pom.groupId = GROUP
-                pom.artifactId = POM_ARTIFACT_ID
-                pom.version = VERSION_NAME
-
-                repository(url: getReleaseRepositoryUrl()) {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-                snapshotRepository(url: getSnapshotRepositoryUrl()) {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-
-                pom.project {
-                    name POM_NAME
-                    packaging POM_PACKAGING
-                    description POM_DESCRIPTION
-                    url POM_URL
-
-                    scm {
-                        url POM_SCM_URL
-                        connection POM_SCM_CONNECTION
-                        developerConnection POM_SCM_DEV_CONNECTION
-                    }
-
-                    licenses {
-                        license {
-                            name POM_LICENCE_NAME
-                            url POM_LICENCE_URL
-                            distribution POM_LICENCE_DIST
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id POM_DEVELOPER_ID
-                            name POM_DEVELOPER_NAME
-                        }
-                    }
-                }
-            }
+// https://developer.android.com/build/publish-library/configure-pub-variants
+android {
+    publishing {
+        singleVariant("release") {
         }
     }
+}
 
-    signing {
-        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
+afterEvaluate {
 
     task androidJavadocs(type: Javadoc) {
         source = "src/main/java"
@@ -92,17 +25,72 @@ afterEvaluate { project ->
     }
 
     task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
+        archiveClassifier.set('javadoc')
         from androidJavadocs.destinationDir
     }
 
     task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
+        archiveClassifier.set('sources')
         from "src/main/java"
     }
 
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId GROUP
+                artifactId POM_ARTIFACT_ID
+                version VERSION_CODE
+
+                from components.release
+
+                artifact androidSourcesJar
+                artifact androidJavadocsJar
+
+                pom {
+                    name = POM_NAME
+                    description = POM_DESCRIPTION
+                    url = POM_URL
+                    licenses {
+                        license {
+                            name = POM_LICENCE_NAME
+                            url = POM_LICENCE_URL
+                            distribution = POM_LICENCE_DIST
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = POM_DEVELOPER_ID
+                            name = POM_DEVELOPER_NAME
+                        }
+                    }
+                    scm {
+                        url = POM_SCM_URL
+                        connection = POM_SCM_CONNECTION
+                        developerConnection = POM_SCM_DEV_CONNECTION
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name "sonatype"
+                url "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username project.nexusUsername
+                    password project.nexusPassword
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications
+}
+
+model {
+    tasks.androidJavadocs {
+        dependsOn(project.tasks.build)
     }
 }

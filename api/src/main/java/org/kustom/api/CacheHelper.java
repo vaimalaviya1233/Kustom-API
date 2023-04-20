@@ -54,7 +54,7 @@ public class CacheHelper {
         return Integer.toString(seed.hashCode());
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressWarnings({"ResultOfMethodCallIgnored", "IOStreamConstructor"})
     public static void copy(InputStream in, File dst) throws IOException {
         if (!dst.exists()) dst.createNewFile();
         copy(in, new FileOutputStream(dst));

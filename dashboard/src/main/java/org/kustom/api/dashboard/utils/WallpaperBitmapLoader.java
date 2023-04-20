@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

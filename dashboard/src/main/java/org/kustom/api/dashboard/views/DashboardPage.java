@@ -3,9 +3,10 @@ package org.kustom.api.dashboard.views;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;

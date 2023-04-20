@@ -7,9 +7,10 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;

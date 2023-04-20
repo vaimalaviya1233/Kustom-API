@@ -23,8 +23,8 @@ public class FileInfo {
         if (c != null) try {
             c.moveToFirst();
             mIsValid = Boolean.parseBoolean(c.getString(c.getColumnIndexOrThrow(COL_VALID)));
-            mSize = Long.valueOf(c.getString(c.getColumnIndexOrThrow(COL_SIZE)));
-            mModified = Long.valueOf(c.getString(c.getColumnIndexOrThrow(COL_MODIFIED)));
+            mSize = Long.parseLong(c.getString(c.getColumnIndexOrThrow(COL_SIZE)));
+            mModified = Long.parseLong(c.getString(c.getColumnIndexOrThrow(COL_MODIFIED)));
             c.close();
         } catch (CursorIndexOutOfBoundsException e) {
             Log.d(TAG, "Cursor is empty, file not found");

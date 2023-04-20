@@ -3,8 +3,8 @@ package org.kustom.api.dashboard;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.support.annotation.BoolRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.BoolRes;
+import androidx.annotation.StringRes;
 
 @SuppressWarnings("WeakerAccess")
 public class DashboardSettings {

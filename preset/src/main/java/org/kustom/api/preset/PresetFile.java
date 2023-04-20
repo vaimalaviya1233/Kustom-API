@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import java.io.IOException;
 import java.io.InputStream;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class PresetFile {
     private final String mName;
     private final String mExt;
@@ -34,13 +34,14 @@ public abstract class PresetFile {
     public abstract InputStream getStream(@NonNull Context context, @NonNull String file)
             throws IOException;
 
+    @NonNull
     @Override
     public String toString() {
         return String.format("%s.%s", mName, mExt);
     }
 
     protected static String extractNameFromPath(@NonNull String path) {
-        return path.replaceAll(".*\\/", "")
+        return path.replaceAll(".*/", "")
                 .replaceAll("\\..*", "");
     }
 

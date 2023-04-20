@@ -2,6 +2,8 @@ package org.kustom.api.preset;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -14,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class PresetInfo {
@@ -22,33 +25,33 @@ public class PresetInfo {
     private final static Gson sGson = new Gson();
 
     @SerializedName("version")
-    private int mVersion;
+    private final int mVersion;
     @SerializedName("title")
-    private String mTitle;
+    private final String mTitle;
     @SerializedName("description")
-    private String mDescription;
+    private final String mDescription;
     @SerializedName("author")
-    private String mAuthor;
+    private final String mAuthor;
     @SerializedName("email")
-    private String mEmail;
+    private final String mEmail;
     @SerializedName("archive")
-    private String mArchive;
+    private final String mArchive;
     @SerializedName("width")
-    private int mWidth;
+    private final int mWidth;
     @SerializedName("height")
-    private int mHeight;
+    private final int mHeight;
     @SerializedName("xscreens")
-    private int mXScreens;
+    private final int mXScreens;
     @SerializedName("yscreens")
-    private int mYScreens;
+    private final int mYScreens;
     @SerializedName("features")
-    private String mFeatures;
+    private final String mFeatures;
     @SerializedName("release")
-    private int mRelease;
+    private final int mRelease;
     @SerializedName("locked")
-    private boolean mLocked = false;
+    private final boolean mLocked;
     @SerializedName("pflags")
-    private int mFlags = 0;
+    private final int mFlags;
 
     private PresetInfo(Builder builder) {
         mVersion = builder.mVersion;
@@ -67,6 +70,7 @@ public class PresetInfo {
         mFlags = builder.mFlags;
     }
 
+    @NonNull
     @Override
     public String toString() {
         String result = mTitle;
@@ -173,10 +177,26 @@ public class PresetInfo {
         return mFlags;
     }
 
+    /**
+     * @return a copy method with a builder function
+     */
+    public PresetInfo copy(@Nullable Consumer<Builder> builder) {
+        Builder b = new Builder(this);
+        if (builder != null) builder.accept(b);
+        return b.build();
+    }
+
+    /**
+     * @return a copy method with a builder function
+     */
+    public PresetInfo copy() {
+        return copy(null);
+    }
+
     @Nullable
     private static PresetInfo fromStream(@NonNull InputStream is) {
         PresetInfo info = null;
-        try (InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+        try (InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
              JsonReader reader = new JsonReader(new BufferedReader(isr))) {
             reader.beginObject();
             String name = reader.nextName();

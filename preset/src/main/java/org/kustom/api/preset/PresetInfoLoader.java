@@ -1,17 +1,22 @@
 package org.kustom.api.preset;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+
 import androidx.annotation.NonNull;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 @SuppressWarnings("unused")
 public class PresetInfoLoader {
     private final static HashMap<String, PresetInfo> sPresetInfoCache = new HashMap<>();
     private final PresetFile mFile;
+    private final Executor executor = Executors.newFixedThreadPool(4);
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     private PresetInfoLoader(@NonNull PresetFile file) {
         mFile = file;
@@ -25,52 +30,36 @@ public class PresetInfoLoader {
         synchronized (sPresetInfoCache) {
             if (sPresetInfoCache.containsKey(mFile.getPath()))
                 callback.onInfoLoaded(sPresetInfoCache.get(mFile.getPath()));
-            else new LoaderTask(context, callback, mFile).execute();
+            else executor.execute(() -> {
+                PresetInfo info = null;
+                String file = mFile.isKomponent() ? "komponent.json" : "preset.json";
+                // Try to load preset info
+                try (InputStream stream = mFile.getStream(context, file)) {
+                    info = new PresetInfo
+                            .Builder(stream)
+                            .withFallbackTitle(mFile.getName())
+                            .build();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                // If failed just use file name as a title
+                if (info == null) info = new PresetInfo
+                        .Builder()
+                        .withTitle(mFile.getName())
+                        .build();
+                // Done, call callback on main thread
+                final PresetInfo result = info;
+                handler.post(() -> {
+                    synchronized (sPresetInfoCache) {
+                        sPresetInfoCache.put(mFile.getPath(), result);
+                        callback.onInfoLoaded(result);
+                    }
+                });
+            });
         }
     }
 
     public interface Callback {
         void onInfoLoaded(PresetInfo info);
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private static class LoaderTask extends AsyncTask<Void, Void, PresetInfo> {
-        private final Callback mCallback;
-        private final Context mContext;
-        private final PresetFile mFile;
-
-        LoaderTask(Context context, Callback callback, PresetFile file) {
-            mContext = context.getApplicationContext();
-            mCallback = callback;
-            mFile = file;
-        }
-
-        @Override
-        protected PresetInfo doInBackground(Void... params) {
-            PresetInfo result = null;
-            String file = mFile.isKomponent() ? "komponent.json" : "preset.json";
-            try (InputStream stream = mFile.getStream(mContext, file)) {
-                result = new PresetInfo
-                        .Builder(stream)
-                        .withFallbackTitle(mFile.getName())
-                        .build();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            // Done
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(PresetInfo result) {
-            if (result == null) result = new PresetInfo
-                    .Builder()
-                    .withTitle(mFile.getName())
-                    .build();
-            synchronized (sPresetInfoCache) {
-                sPresetInfoCache.put(mFile.getPath(), result);
-                mCallback.onInfoLoaded(result);
-            }
-        }
     }
 }

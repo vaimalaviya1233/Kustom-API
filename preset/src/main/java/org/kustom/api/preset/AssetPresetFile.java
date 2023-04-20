@@ -1,6 +1,8 @@
 package org.kustom.api.preset;
 
 import android.content.Context;
+
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import java.io.FileNotFoundException;
@@ -9,6 +11,8 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+@SuppressWarnings("unused")
+@Keep
 public class AssetPresetFile extends PresetFile {
     private final String mFilePath;
 
@@ -17,6 +21,7 @@ public class AssetPresetFile extends PresetFile {
      *
      * @param path the path in the assets folder, es "widgets/awezome.kwgt"
      */
+    @Keep
     public AssetPresetFile(String path) {
         super(extractNameFromPath(path), extractExtFromPath(path));
         mFilePath = path;

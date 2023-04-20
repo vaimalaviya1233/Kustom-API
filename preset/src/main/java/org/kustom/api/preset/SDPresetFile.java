@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+@SuppressWarnings("unused")
 public class SDPresetFile extends PresetFile {
     private final File mFile;
 

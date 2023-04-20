@@ -31,3 +31,5 @@ android {
 repositories {
     mavenCentral()
 }
+
+apply from: '../maven.gradle'

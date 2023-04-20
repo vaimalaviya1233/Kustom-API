@@ -18,9 +18,6 @@ ext {
     buildToolsVersion = "33.0.2"
     compileSdkVersion = 33
     targetSdkVersion = 33
-    supportLibVersion = "28.0.0"
-    glideVersion = "4.15.1"
-    gsonVersion = "2.10.1"
 }
 
 allprojects {

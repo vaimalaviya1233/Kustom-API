@@ -11,7 +11,7 @@ import java.util.HashMap;
 @SuppressWarnings("unused")
 public class PresetInfoLoader {
     private final static HashMap<String, PresetInfo> sPresetInfoCache = new HashMap<>();
-    private PresetFile mFile;
+    private final PresetFile mFile;
 
     private PresetInfoLoader(@NonNull PresetFile file) {
         mFile = file;

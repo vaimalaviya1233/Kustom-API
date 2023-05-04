@@ -29,6 +29,7 @@ public class PresetFeatures {
     public final static int FEATURE_SHELL = 2 << 13;
     public final static int FEATURE_UNREAD = 2 << 14;
     public final static int FEATURE_CALL = 2 << 15;
+    public final static int FEATURE_AIR_QUALITY = 2 << 16;
 
     /**
      * Static empty feature flag object
@@ -105,6 +106,9 @@ public class PresetFeatures {
                 case "CALL":
                     add(FEATURE_CALL);
                     break;
+                case "AIR_QUALITY":
+                    add(FEATURE_AIR_QUALITY);
+                    break;
             }
         }
     }
@@ -173,6 +177,7 @@ public class PresetFeatures {
     }
 
     @Override
+    @NonNull
     public String toString() {
         if (mFlags == 0) return "";
         StringBuilder sb = new StringBuilder();
@@ -191,6 +196,7 @@ public class PresetFeatures {
         if (contains(FEATURE_SHELL)) sb.append("SHELL ");
         if (contains(FEATURE_UNREAD)) sb.append("UNREAD ");
         if (contains(FEATURE_CALL)) sb.append("CALL ");
+        if (contains(FEATURE_AIR_QUALITY)) sb.append("AIR_QUALITY ");
         return sb.toString().trim();
     }
 

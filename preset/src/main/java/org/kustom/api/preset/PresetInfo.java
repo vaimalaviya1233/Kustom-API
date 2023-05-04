@@ -89,36 +89,41 @@ public class PresetInfo {
     /**
      * @return title of the preset
      */
+    @NonNull
     public String getTitle() {
-        return mTitle;
+        return mTitle != null ? mTitle : "";
     }
 
     /**
      * @return description of the preset
      */
+    @NonNull
     public String getDescription() {
-        return mDescription;
+        return mDescription != null ? mDescription : "";
     }
 
     /**
      * @return author of the preset
      */
+    @NonNull
     public String getAuthor() {
-        return mAuthor;
+        return mAuthor != null ? mAuthor : "";
     }
 
     /**
      * @return email of the author
      */
+    @NonNull
     public String getEmail() {
-        return mEmail;
+        return mEmail != null ? mEmail : "";
     }
 
     /**
      * @return Kustom internal URI representing file authority
      */
+    @NonNull
     public String getArchive() {
-        return mArchive;
+        return mArchive != null ? mArchive : "";
     }
 
     /**
@@ -152,8 +157,10 @@ public class PresetInfo {
     /**
      * @return preset features
      */
+    @NonNull
     public PresetFeatures getFeatures() {
-        return new PresetFeatures(mFeatures);
+        if (mFeatures == null) return new PresetFeatures();
+        else return new PresetFeatures(mFeatures);
     }
 
     /**

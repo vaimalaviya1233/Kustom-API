@@ -1,6 +1,7 @@
 package org.kustom.api.dashboard.model;
 
 import androidx.annotation.NonNull;
+
 import android.text.TextUtils;
 
 import org.json.JSONException;
@@ -35,11 +36,23 @@ public class ImageData {
         return mAuthor;
     }
 
+    /**
+     * Get the image url
+     * @return the image url if its a fully qualified url, otherwise an asset file url
+     */
+    @NonNull
     public String getUrl() {
-        return mUrl;
+        if (mUrl.contains("://")) return mUrl;
+        return "file:///android_asset/" + mUrl;
     }
 
+    /**
+     * Get the thumbnail url
+     * @return the thumbnail url if its a fully qualified url, otherwise an asset file url
+     */
+    @NonNull
     public String getThumbUrl() {
-        return mThumbUrl;
+        if (mThumbUrl.contains("://")) return mThumbUrl;
+        else return "file:///android_asset/" + mThumbUrl;
     }
 }

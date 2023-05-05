@@ -1,0 +1,5 @@
+Copy your image wallpapers here, rules are the following:
+- Images must be references in a local or remote JSON accordint
+  to https://kustom.rocks/apkmaker/walls format
+- Path in the JSON must be relative to assets (so images/filename)
+- Thumbnail should be below 100KB, do not use the same image as the wallpaper

@@ -1,0 +1,16 @@
+{
+  "wallpapers": [
+    {
+      "author": "Michał Kubalczyk",
+      "url": "images/image01.webp",
+      "name": "Local image example",
+      "thumbnail": "images/image01_thumb.webp"
+    },
+    {
+      "author": "No One",
+      "url": "https://static.pexels.com/photos/268832/pexels-photo-268832.jpeg",
+      "name": "Remote image example",
+      "thumbnail": "https://images.pexels.com/photos/268832/pexels-photo-268832.jpeg?h=350&auto=compress&cs=tinysrgb"
+    }
+  ]
+}

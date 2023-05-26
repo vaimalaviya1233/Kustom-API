@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <queries>
+        <package android:name="org.kustom.widget" />
+        <package android:name="org.kustom.wallpaper" />
+        <package android:name="org.kustom.lockscreen" />
+        <package android:name="org.kustom.watchface" />
+    </queries>
 
     <application>
         <activity

@@ -2,8 +2,10 @@ package org.kustom.api.dashboard.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,7 +17,6 @@ import com.bumptech.glide.request.transition.Transition;
 import org.kustom.api.dashboard.R;
 import org.kustom.api.dashboard.config.KustomConfig;
 import org.kustom.api.dashboard.utils.ScreenUtils;
-import org.kustom.api.dashboard.utils.WallpaperBitmapLoader;
 import org.kustom.api.preset.PresetFile;
 import org.kustom.api.preset.PresetInfoLoader;
 import org.kustom.api.preset.glide.PresetFileModelLoader;
@@ -100,12 +101,8 @@ public class DashboardPresetItem
                     }
                 });
         if (useWidgetLayout()) {
-            WallpaperBitmapLoader.create()
-                    .load(context, bitmap -> {
-                        if (bitmap != null)
-                            holder.mBackground.setImageBitmap(bitmap);
-                        holder.mBackground.setVisibility(View.VISIBLE);
-                    });
+            holder.mBackground.setImageBitmap(null);
+            holder.mBackground.setVisibility(View.VISIBLE);
         } else {
             holder.mBackground.setImageBitmap(null);
             holder.mBackground.setVisibility(View.GONE);

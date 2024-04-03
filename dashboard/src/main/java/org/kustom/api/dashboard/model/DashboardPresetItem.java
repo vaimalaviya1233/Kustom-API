@@ -32,7 +32,8 @@ public class DashboardPresetItem
     public DashboardPresetItem(@NonNull PresetFile presetFile, float screenRatio) {
         super(screenRatio);
         mPresetFile = presetFile;
-        mUseWidgetLayout = KustomConfig.ENV_KWGT.getExtension().equals(mPresetFile.getExt())
+        mUseWidgetLayout = KustomConfig.ENV_KWCH.getExtension().equals(mPresetFile.getExt())
+                || KustomConfig.ENV_KWGT.getExtension().equals(mPresetFile.getExt())
                 || KustomConfig.ENV_KOMP.getExtension().equals(mPresetFile.getExt());
     }
 

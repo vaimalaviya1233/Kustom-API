@@ -34,7 +34,7 @@ public class KustomConfig {
         ));
         envs.put("kwch", new KustomEnv(
                 "kwch",
-                "watches",
+                "watchfaces",
                 "org.kustom.watchface",
                 "org.kustom.lib.editor.WatchAdvancedEditorActivity"
         ));

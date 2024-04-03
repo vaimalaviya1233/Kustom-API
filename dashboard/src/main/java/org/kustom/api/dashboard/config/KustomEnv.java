@@ -2,7 +2,10 @@ package org.kustom.api.dashboard.config;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.util.Log;
 
 import java.io.IOException;
@@ -18,25 +21,34 @@ public class KustomEnv {
     private final String mEditorActivity;
     private String[] mFiles;
 
-    KustomEnv(String extension, String folder, String pkg, String editorActivity) {
+    KustomEnv(
+            @NonNull String extension,
+            @NonNull String folder,
+            String pkg,
+            String editorActivity
+    ) {
         mExtension = extension;
         mFolder = folder;
         mPkg = pkg;
         mEditorActivity = editorActivity;
     }
 
+    @NonNull
     public String getExtension() {
         return mExtension;
     }
 
+    @NonNull
     public String getFolder() {
         return mFolder;
     }
 
+    @Nullable
     public String getPkg() {
         return mPkg;
     }
 
+    @Nullable
     public String getEditorActivity() {
         return mEditorActivity;
     }
